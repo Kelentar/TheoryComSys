@@ -1,0 +1,111 @@
+PS C:\Users\Maks\Desktop\TheoryComSys> docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+2db29710123e: Pull complete
+Digest: sha256:6e8b6f026e0b9c419ea0fd02d3905dd0952ad1feea67543f525c73a0a790fefb
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+PS C:\Users\Maks\Desktop\TheoryComSys> docker images hello-world
+REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+hello-world   latest    feb5d9fea6a5   17 months ago   13.3kB
+
+
+PS C:\Users\Maks\Desktop\TheoryComSys> docker pull ellerbrock/alpine-bash-git
+Using default tag: latest
+latest: Pulling from ellerbrock/alpine-bash-git
+c87736221ed0: Pull complete
+eadf65686d00: Pull complete
+Digest: sha256:46262050f227c4515a501607873d760961ee32d92fa5b8cf9c89aca3c564d008
+Status: Downloaded newer image for ellerbrock/alpine-bash-git:latest
+docker.io/ellerbrock/alpine-bash-git:latest
+
+
+PS C:\Users\Maks\Desktop\TheoryComSys> docker images ellerbrock/alpine-bash-git
+REPOSITORY                   TAG       IMAGE ID       CREATED       SIZE
+ellerbrock/alpine-bash-git   latest    67830aff234a   3 years ago   26.7MB
+
+
+PS C:\Users\Maks\Desktop\TheoryComSys> docker run -it -d --name lab_01 --entrypoint /bin/bash  ellerbrock/alpine-bash-git
+a8419ed09791a7034fceb80264aa19f7af3bdc3d90fbe22ffe65dd12e7f7057e
+
+
+
+
+PS C:\Users\Maks\Desktop\TheoryComSys> docker  exec -it lab_01 bash
+
+bash-4.4$ git --version
+git version 2.18.1
+
+bash-4.4$ whoami
+download
+
+bash-4.4$ cd /
+
+bash-4.4$ ls -la
+total 68
+drwxr-xr-x    1 root     root          4096 Mar 10 19:00 .
+drwxr-xr-x    1 root     root          4096 Mar 10 19:00 ..
+-rwxr-xr-x    1 root     root             0 Mar 10 19:00 .dockerenv
+drwxr-xr-x    1 root     root          4096 Oct 15  2019 bin
+drwxr-xr-x    5 root     root           360 Mar 10 19:00 dev
+drwxr-xr-x    1 root     root          4096 Mar 10 19:00 etc
+drwxr-xr-x    1 root     root          4096 Oct 15  2019 home
+drwxr-xr-x    1 root     root          4096 Oct 15  2019 lib
+drwxr-xr-x    5 root     root          4096 Mar  6  2019 media
+drwxr-xr-x    2 root     root          4096 Mar  6  2019 mnt
+dr-xr-xr-x 13605 root     root             0 Mar 10 19:00 proc
+drwx------    2 root     root          4096 Mar  6  2019 root
+drwxr-xr-x    2 root     root          4096 Mar  6  2019 run
+drwxr-xr-x    2 root     root          4096 Mar  6  2019 sbin
+drwxr-xr-x    2 root     root          4096 Mar  6  2019 srv
+dr-xr-xr-x   11 root     root             0 Mar 10 19:00 sys
+drwxrwxrwt    2 root     root          4096 Mar  6  2019 tmp
+drwxr-xr-x    1 root     root          4096 Oct 15  2019 usr
+drwxr-xr-x    1 root     root          4096 Oct 15  2019 var
+
+bash-4.4$ cd /home/download
+
+bash-4.4$ git clone https://github.com/shekhargulati/python-flask-docker-hello-world
+Cloning into 'python-flask-docker-hello-world'...
+remote: Enumerating objects: 27, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 27 (delta 4), reused 4 (delta 4), pack-reused 19
+Unpacking objects: 100% (27/27), done.
+
+
+PS C:\Users\Maks\Desktop\TheoryComSys> docker restart lab_01
+lab_01
+
+PS C:\Users\Maks\Desktop\TheoryComSys> docker  exec -it lab_01 bash
+bash-4.4$ ls -la
+total 12
+drwxr-sr-x    3 download download      4096 Mar 10 19:37 .
+drwxr-xr-x    1 root     root          4096 Oct 15  2019 ..
+drwxr-sr-x    3 download download      4096 Mar 10 19:37 python-flask-docker-hello-world
+
+PS C:\Users\Maks\Desktop\TheoryComSys\Lab_1> docker stop lab_01
+lab_01
+
