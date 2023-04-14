@@ -1,0 +1,82 @@
+PS C:\Users\Maks\Desktop\Univer\TheoryComSys> cd Lab_03
+
+PS C:\Users\Maks\Desktop\Univer\TheoryComSys\Lab_03> docker build -t lab_03 .
+
+Build an image from a Dockerfile
+ => => transferring context: 391B                                                                                                                                                                                                  0.0s
+ => [2/3] RUN apt-get update -y && apt-get install -y apache2                                                                                                                                                                     17.7s
+ => [3/3] COPY web_server/ /var/www/html/                                                                                                                                                                                          0.0s
+ => exporting to image                                                                                                                                                                                                             0.7s
+ => => exporting layers                                                                                                                                                                                                            0.7s
+ => => writing image sha256:03811a1e771e29a49de98a5cd0cf695ba4e1798673cdbfab24fc647caedfd563                                                                                                                                       0.0s
+ => => naming to docker.io/library/lab_03
+
+PS C:\Users\Maks\Desktop\Univer\TheoryComSys\Lab_03> docker run -p 8080:80 -v /web_server:/var/www/html/ lab_03
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.2. Set the 'ServerName' directive globally to suppress this message
+
+PS C:\Users\Maks\Desktop\Univer\TheoryComSys\Lab_03> docker rename quirky_curie lab_03
+PS C:\Users\Maks\Desktop\Univer\TheoryComSys> docker start lab_03
+lab_03
+
+PS C:\Users\Maks\Desktop\Univer\TheoryComSys\Lab_03\mysql> docker run -d -p 3306:3306 --name mysql -v ./data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test_db mysql:latest
+Unable to find image 'mysql:latest' locally
+latest: Pulling from library/mysql
+328ba678bf27: Pull complete
+f3f5ff008d73: Pull complete
+dd7054d6d0c7: Pull complete
+70b5d4e8750e: Pull complete
+cdc4a7b43bdd: Pull complete
+3e9c0b61a8f3: Pull complete
+806a08b6c085: Pull complete
+021b2cebd832: Pull complete
+ad31ba45b26b: Pull complete
+0d4c2bd59d1c: Pull complete
+148dcef42e3b: Pull complete
+Digest: sha256:f496c25da703053a6e0717f1d52092205775304ea57535cc9fcaa6f35867800b
+Status: Downloaded newer image for mysql:latest
+0ed7be4bc7fb533459885284ac3abfc69cdabc9a792c9f7b42d4c822614c42f4
+PS C:\Users\Maks\Desktop\Univer\TheoryComSys\Lab_03\mysql>  docker exec -it 0ed7be4bc7fb533459885284ac3abfc69cdabc9a792c9f7b42d4c822614c42f4 bash
+bash-4.4# mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+
+
+PS C:\Users\Maks\Desktop\Univer\TheoryComSys\Lab_03\mysql> docker run -d --name myadmin --link mysql:db -e PMA_HOST=db -e PMA_USER=root -e PMA_PASSWORD=root -p 8080:80 phpmyadmin/phpmyadmin:latest
+Unable to find image 'phpmyadmin/phpmyadmin:latest' locally
+latest: Pulling from phpmyadmin/phpmyadmin
+f1f26f570256: Pull complete
+ee0a4e40ccac: Pull complete
+5ca9fb408faa: Pull complete
+5baa808a48ff: Pull complete
+6e8d74e4d8ee: Pull complete
+fac8e70fcf67: Pull complete
+b3b7906fb177: Pull complete
+cb4935bbeb83: Pull complete
+c9e00ef337e3: Pull complete
+cfe495c8d695: Pull complete
+dcc3fd107f0c: Pull complete
+fe3c587d1f07: Pull complete
+677f27d94442: Pull complete
+4d778a8cb653: Pull complete
+5f0f7b557ecd: Pull complete
+6ad259d60f7c: Pull complete
+41acd705cbc4: Pull complete
+912204d5a7e6: Pull complete
+Digest: sha256:ed87921184b59f7d8fc85c6a5f041c22758a4d4419c0ee3bac38eb7e133eaed3
+Status: Downloaded newer image for phpmyadmin/phpmyadmin:latest
+3d43bd834a8c0cc84b39f9681337cc61e20a23c4b976f34b5dbd66c202efad2f
+
+
+
