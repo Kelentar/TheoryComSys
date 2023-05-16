@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  checker:
+    build:
+      context: .
+      dockerfile: Dockerfile_checker
+    container_name: file_checker
+    volumes:
+      - .:/lab4
+    command: python ./lab4/file_checker.py
+
+
+  creator:
+    build:
+      context: .
+      dockerfile: Dockerfile_creator
+    container_name: time_creator
+    volumes:
+      - .:/lab4
+    command: python ./lab4/time_creator.py

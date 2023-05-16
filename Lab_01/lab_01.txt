@@ -99,7 +99,7 @@ Unpacking objects: 100% (27/27), done.
 PS C:\Users\Maks\Desktop\TheoryComSys> docker restart lab_01
 lab_01
 
-PS C:\Users\Maks\Desktop\TheoryComSys> docker  exec -it lab_01 bash
+PS C:\Users\Maks\Desktop\TheoryComSys> docker exec -it lab_01 bash
 bash-4.4$ ls -la
 total 12
 drwxr-sr-x    3 download download      4096 Mar 10 19:37 .

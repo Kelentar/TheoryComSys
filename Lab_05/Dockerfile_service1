@@ -1,0 +1,7 @@
+FROM python:3.10
+
+COPY service_1.py ./
+
+RUN pip install kafka-python==2.0.2
+
+CMD ["python", "service_1.py"]

@@ -1,0 +1,29 @@
+  version: '3.1'
+  services:
+    mysql:
+      image: mysql:latest
+      restart: always
+      ports:
+        - 3306:3306
+      expose:
+        - 3306
+      environment:
+        MYSQL_DATABASE: test_db
+        MYSQL_ROOT_USER: root
+        MYSQL_ROOT_PASSWORD: root
+      volumes:
+        - /data:/var/lib/mysql
+
+    myadmin:
+      image: phpmyadmin/phpmyadmin:latest
+      restart: always
+      ports:
+        - 8080:80
+      environment:
+        PMA_HOST: mysql
+        PMA_USE: root
+        PMA_PASSWORD: root
+      depends_on:
+        - mysql
+      links:
+        - mysql

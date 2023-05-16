@@ -1,0 +1,10 @@
+FROM python:3.10
+
+COPY service_2.py ./
+
+RUN pip install kafka-python==2.0.2
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+CMD ["python", "service_2.py"]
